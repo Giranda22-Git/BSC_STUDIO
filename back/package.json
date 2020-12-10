@@ -1,0 +1,19 @@
+{
+  "name": "bsc_studio",
+  "version": "1.0.0",
+  "description": "web site for site creator company",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Giranda22-Git/BSC_STUDIO.git"
+  },
+  "author": "Giranda22-Git, beamingdeamon, Heigen, Damir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Giranda22-Git/BSC_STUDIO/issues"
+  },
+  "homepage": "https://github.com/Giranda22-Git/BSC_STUDIO#readme"
+}
