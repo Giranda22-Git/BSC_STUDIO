@@ -1,18 +1,23 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="wrapper">
+    <chatHelper id="chatHelper" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import chatHelper from '@/components/chatHelper.vue'
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    chatHelper
   }
 }
 </script>
+
+<style lang="sass" scoped>
+  .wrapper
+    width: 100%
+    #chatHelper
+      width: 30%
+      height: 70vh
+</style>

@@ -4,16 +4,27 @@
   "description": "web site for site creator company",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Giranda22-Git/BSC_STUDIO.git"
   },
-  "author": "Giranda22-Git, beamingdeamon, Heigen, Damir",
+  "author": "Giranda22-Git, beamingdeamon, Heigen007, Damir",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Giranda22-Git/BSC_STUDIO/issues"
   },
-  "homepage": "https://github.com/Giranda22-Git/BSC_STUDIO#readme"
+  "homepage": "https://github.com/Giranda22-Git/BSC_STUDIO#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.7",
+    "multer": "^1.4.2",
+    "ws": "^7.4.1"
+  }
 }
