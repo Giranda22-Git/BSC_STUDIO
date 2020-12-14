@@ -37,6 +37,13 @@ export default {
     },
     isAuth: true
   }),
+  mounted () {
+    const connection = new WebSocket('ws://localhost:1000')
+    console.log(connection)
+    connection.onmessage = (msg) => {
+      console.log(msg)
+    }
+  },
   methods: {
     async reg () {
       const params = {

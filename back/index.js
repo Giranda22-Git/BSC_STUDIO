@@ -5,6 +5,7 @@ const cors = require('cors')
 const multer = require('multer')
 const WebSocket = require('ws')
 const wss = new WebSocket.Server({ port: 1000 })
+const telegraf = require('telegraf')
 
 const serverData = {
   mongoUrl: 'mongodb://localhost:27017/BSC_STUDIO',
@@ -39,7 +40,18 @@ async function init(serverData) {
 
     app.use('/messages', require('./endPoints/messages.js'))
     //app.use('/auctions', require('./endPoints/auctions.js'))
-
+    //-423939146
+    const bot = new telegraf('1486601848:AAF6cLztC7SlVfGV1Epal3N6tVfJVHZ245A')
+    bot.start((ctx) => {
+      console.log(ctx.update.message.chat)
+      ctx.reply('Welcome')
+    })
+    bot.help((ctx) => ctx.reply('Send me a sticker'))
+    bot.on('sticker', (ctx) => ctx.reply('👍'))
+    bot.hears('hi', (ctx) => console.log(ctx))
+    bot.telegram.sendMessage('-423939146', 'Hi guys')
+    bot.launch()
+    console.log(bot)
     wss.on('connection', async ws => {
       const all = await mongoMessages.find().exec()
       ws.send(JSON.stringify({
