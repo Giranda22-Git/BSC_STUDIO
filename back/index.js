@@ -40,7 +40,9 @@ async function init(serverData) {
 
     app.use('/messages', require('./endPoints/messages.js'))
     //app.use('/auctions', require('./endPoints/auctions.js'))
-    //-423939146
+
+    // telegram bot
+    // chat id -423939146
     const bot = new telegraf('1486601848:AAF6cLztC7SlVfGV1Epal3N6tVfJVHZ245A')
     bot.start((ctx) => {
       console.log(ctx.update.message.chat)
@@ -48,10 +50,9 @@ async function init(serverData) {
     })
     bot.help((ctx) => ctx.reply('Send me a sticker'))
     bot.on('sticker', (ctx) => ctx.reply('👍'))
-    bot.hears('hi', (ctx) => console.log(ctx))
-    bot.telegram.sendMessage('-423939146', 'Hi guys')
-    bot.launch()
-    console.log(bot)
+    
+    //bot.telegram.sendMessage('-423939146', 'Hi guys')
+    console.log(bot.telegram)
     wss.on('connection', async ws => {
       const all = await mongoMessages.find().exec()
       ws.send(JSON.stringify({
@@ -61,12 +62,17 @@ async function init(serverData) {
           all: all
         }
       }))
-
       ws.on('message', async msg => {
         msg = JSON.parse(msg)
         const data = msg.data
 
-        if (msg.action === 'message') {
+        if (msg.action === 'check') {
+          bot.telegram.sendMessage('-423939146', 
+            `new message sended from\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
+          )
+        }
+        else if (msg.action === 'message') {
+          bot.command('hi', (ctx) => ctx.reply('true'))
           const result = await mongoMessages.updateOne({ phoneNumber: data.phoneNumber }, {$push: { messages: data.message }})
           ws.send(JSON.stringify({
             action: 'sendMessage',
@@ -81,6 +87,8 @@ async function init(serverData) {
         }
       })
     })
+    bot.launch()
   })
   mongoose.connection.emit('open')
+  
 }

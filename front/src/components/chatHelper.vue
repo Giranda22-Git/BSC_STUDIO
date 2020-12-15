@@ -5,7 +5,7 @@
       <div class="naming">Administrator</div>
     </div>
     <div class="regForm" v-show="isAuth">
-      <input v-model="username" type="text" placeholder="Username">
+      <input v-model="userName" type="text" placeholder="Username">
       <input v-model="phone" type="phone" placeholder="Phone" @keypress.enter="reg">
       <button @click="reg">send</button>
     </div>
@@ -26,19 +26,19 @@
 
 <script>
 import axios from 'axios'
+const connection = new WebSocket('ws://localhost:1000')
 export default {
   name: 'chatHelper',
   data: () => ({
     message: null,
     phone: null,
-    username: null,
+    userName: null,
     user: {
       messages: []
     },
     isAuth: true
   }),
   mounted () {
-    const connection = new WebSocket('ws://localhost:1000')
     console.log(connection)
     connection.onmessage = (msg) => {
       console.log(msg)
@@ -47,7 +47,7 @@ export default {
   methods: {
     async reg () {
       const params = {
-        userName: this.username,
+        userName: this.userName,
         phoneNumber: this.phone
       }
       await axios.post('http://localhost:3000/messages', params)
@@ -62,6 +62,17 @@ export default {
         })
     },
     async send () {
+      const params = JSON.stringify({
+        action: 'check',
+        agent: 'client',
+        data: {
+          userName: this.userName,
+          phoneNumber: this.phone,
+          message: this.message
+        }
+      })
+      console.log(params)
+      connection.send(params)
     }
   }
 }
