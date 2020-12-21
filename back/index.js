@@ -49,10 +49,13 @@ async function init(serverData) {
       ctx.reply('Welcome')
     })
     bot.help((ctx) => ctx.reply('Send me a sticker'))
-    bot.on('sticker', (ctx) => ctx.reply('👍'))
     
     //bot.telegram.sendMessage('-423939146', 'Hi guys')
     console.log(bot.telegram)
+    bot.command('send', (ctx, args) => {
+      ctx.reply(args)
+      console.log(args)
+    })
     wss.on('connection', async ws => {
       const all = await mongoMessages.find().exec()
       ws.send(JSON.stringify({
