@@ -6,6 +6,7 @@ const multer = require('multer')
 const WebSocket = require('ws')
 const wss = new WebSocket.Server({ port: 1000 })
 const telegraf = require('telegraf')
+const uid = require('uid')
 
 const serverData = {
   mongoUrl: 'mongodb://localhost:27017/BSC_STUDIO',
@@ -23,6 +24,8 @@ app.use((req, res, next) => {
   next()
 })
 app.use(cors())
+
+const clients = new Set()
 
 init(serverData)
 
@@ -51,20 +54,27 @@ async function init(serverData) {
     bot.help((ctx) => ctx.reply('Send me a sticker'))
     
     //bot.telegram.sendMessage('-423939146', 'Hi guys')
-    console.log(bot.telegram)
-    bot.command('send', (ctx, args) => {
-      ctx.reply(args)
-      console.log(args)
+    wss.on('error', err => {
+      console.log(err)
     })
     wss.on('connection', async ws => {
-      const all = await mongoMessages.find().exec()
-      ws.send(JSON.stringify({
-        action: 'sendData',
-        agent: 'server',
-        data: {
-          all: all
-        }
-      }))
+      clients.add(ws)
+      console.log('connected')
+      bot.command('send', (ctx) => {
+        const telegramMessage = ctx.message.text.replace('/send', '')
+        ws.send(JSON.stringify({
+          action: 'sendMessage',
+          agent: 'telegram',
+          data: {
+            result: true,
+            phoneNumber: '+7(705)-553-99-66',
+            userName: 'Administrator',
+            message: telegramMessage
+          }
+        }))
+      })
+      bot.launch()
+
       ws.on('message', async msg => {
         msg = JSON.parse(msg)
         const data = msg.data
@@ -75,7 +85,6 @@ async function init(serverData) {
           )
         }
         else if (msg.action === 'message') {
-          bot.command('hi', (ctx) => ctx.reply('true'))
           const result = await mongoMessages.updateOne({ phoneNumber: data.phoneNumber }, {$push: { messages: data.message }})
           ws.send(JSON.stringify({
             action: 'sendMessage',
@@ -88,6 +97,11 @@ async function init(serverData) {
             }
           }))
         }
+      })
+
+      ws.on('close', () => {
+        clients.delete(ws)
+        console.log(`deleted: ${ws}`, clients)
       })
     })
     bot.launch()

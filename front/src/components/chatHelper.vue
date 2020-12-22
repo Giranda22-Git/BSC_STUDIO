@@ -5,6 +5,7 @@
       <div class="naming">Administrator</div>
     </div>
     <div class="regForm" v-show="isAuth">
+      {{ trustedMessage }}
       <input v-model="userName" type="text" placeholder="Username">
       <input v-model="phone" type="phone" placeholder="Phone" @keypress.enter="reg">
       <button @click="reg">send</button>
@@ -36,12 +37,16 @@ export default {
     user: {
       messages: []
     },
-    isAuth: true
+    isAuth: true,
+    trustedMessage: null
   }),
   mounted () {
-    console.log(connection)
     connection.onmessage = (msg) => {
-      console.log(msg)
+      console.log(JSON.parse(msg.data))
+      this.trustedMessage = JSON.parse(msg.data)
+    }
+    connection.onerror = (err) => {
+      console.log(err)
     }
   },
   methods: {
