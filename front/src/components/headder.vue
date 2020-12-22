@@ -55,19 +55,19 @@ export default {
       display: flex
       flex-direction: row
       .info
-        width: 30%
+        width: 20%
         font-weight: 400;
-        font-size: 1.5em;
+        font-size: 1em;
         color: #FFFFFF;
         text-align: center
       .rect
         display: flex
         justify-content: center;
-        align-items: center
-        width: 10%
+        align-items: flex-end
+        width: 30%
         flex-direction: column
         .recta
-          width: 50%
+          width: 10%
           height: 20%
           padding: 0.1em
 
