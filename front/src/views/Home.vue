@@ -1,15 +1,15 @@
 <template>
   <div class="wrapper">
-    <chatHelper id="chatHelper" />
+    <mainstr />
   </div>
 </template>
 
 <script>
-import chatHelper from '@/components/chatHelper.vue'
+import mainstr from '@/components/main_menu.vue'
 export default {
   name: 'Home',
   components: {
-    chatHelper
+    mainstr
   }
 }
 </script>
@@ -17,7 +17,4 @@ export default {
 <style lang="sass" scoped>
   .wrapper
     width: 100%
-    #chatHelper
-      width: 30%
-      height: 70vh
 </style>
