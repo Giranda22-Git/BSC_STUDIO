@@ -6,7 +6,7 @@ const multer = require('multer')
 const WebSocket = require('ws')
 const wss = new WebSocket.Server({ port: 1000 })
 const telegraf = require('telegraf')
-const uid = require('uid')
+const {uid} = require('uid')
 
 const serverData = {
   mongoUrl: 'mongodb://localhost:27017/BSC_STUDIO',
@@ -58,20 +58,32 @@ async function init(serverData) {
       console.log(err)
     })
     wss.on('connection', async ws => {
-      clients.add(ws)
-      console.log('connected')
+      const newConnection = {
+        uid: uid(16),
+        connection: ws
+      }
+      clients.add(newConnection)
+      console.log(`connected: ${newConnection.uid}`)
       bot.command('send', (ctx) => {
         const telegramMessage = ctx.message.text.replace('/send', '')
-        ws.send(JSON.stringify({
-          action: 'sendMessage',
-          agent: 'telegram',
-          data: {
-            result: true,
-            phoneNumber: '+7(705)-553-99-66',
-            userName: 'Administrator',
-            message: telegramMessage
+        const queryConnectionUID = telegramMessage.substr(telegramMessage.indexOf('uid: ') + 5, telegramMessage.indexOf(';') - 6)
+        ctx.reply(queryConnectionUID)
+        clients.forEach(client => {
+          if (client.uid === queryConnectionUID) {
+            client.connection.send(JSON.stringify({
+              action: 'sendMessage',
+              agent: 'telegram',
+              data: {
+                result: true,
+                phoneNumber: '+7(705)-553-99-66',
+                userName: 'Administrator',
+                message: telegramMessage.substr(telegramMessage.indexOf(';') + 2)
+              }
+            }))
+          } else {
+            ctx.reply(`uid is wrong; ${client.uid} != ${queryConnectionUID}`)
           }
-        }))
+        })
       })
       bot.launch()
 
@@ -81,7 +93,7 @@ async function init(serverData) {
 
         if (msg.action === 'check') {
           bot.telegram.sendMessage('-423939146', 
-            `new message sended from\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
+            `new message sended from\nuid: ${newConnection.uid}\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
           )
         }
         else if (msg.action === 'message') {
