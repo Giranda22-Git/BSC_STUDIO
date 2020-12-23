@@ -27,8 +27,8 @@ export default {
   .main
     width: 100%
     height: 100vh
-    background-image: url('../assets/photo_main.jpg');
-    background-repeat: no-repeat;
+    background-image: url('../assets/photo_main.jpg')
+    background-repeat: no-repeat
     .text
       font-size: 6em
       position: absolute
@@ -37,6 +37,6 @@ export default {
       color: white
       max-width: 40vw
       text-transform: uppercase;
-      font-family: Angry;
+      font-family: Angry
 
 </style>

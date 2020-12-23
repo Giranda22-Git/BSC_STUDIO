@@ -35,8 +35,8 @@ export default {
 
 <style lang="sass" scoped>
   .header
-    font-family: SF Pro Display;
-    font-style: normal;
+    font-family: SF Pro Display
+    font-style: normal
     margin: 0
     padding: 0
     width: 100vw
@@ -53,18 +53,18 @@ export default {
       width: 40%
     .text
       width: 40%
-      justify-content: center;
+      justify-content: center
       display: flex
       flex-direction: row
       .info
         width: 20%
-        font-weight: 400;
-        font-size: 1.3em;
-        color: #FFFFFF;
+        font-weight: 400
+        font-size: 1.3em
+        color: #FFFFFF
         text-align: center
       .rect
         display: flex
-        justify-content: center;
+        justify-content: center
         align-items: flex-end
         width: 30%
         flex-direction: column
