@@ -1,6 +1,7 @@
 <template>
 <div class="main">
   <headerr />
+  <div class="text">Вне Представление</div>
   </div>
 </template>
 
@@ -28,5 +29,14 @@ export default {
     height: 100vh
     background-image: url('../assets/photo_main.jpg');
     background-repeat: no-repeat;
+    .text
+      font-size: 6em
+      position: absolute
+      left: 2%
+      top: 70%
+      color: white
+      max-width: 40vw
+      text-transform: uppercase;
+      font-family: Angry;
 
 </style>
