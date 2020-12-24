@@ -28,6 +28,7 @@ export default {
     width: 100%
     height: 100vh
     background-image: url('../assets/photo_main.jpg')
+    background-size: cover
     background-repeat: no-repeat
     .text
       font-size: 6em
