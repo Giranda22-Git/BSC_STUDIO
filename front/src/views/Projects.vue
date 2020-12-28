@@ -33,6 +33,14 @@
         </div>
       </div>
     </div>
+    <div class="projects">
+      <div class="project left"></div>
+      <div class="project right"></div>
+    </div>
+    <div class="other_works">
+      <div class="inner-photo"></div>
+      <div class="other">Другие кубики</div>
+    </div>
   </div>
 </template>
 
@@ -68,7 +76,7 @@ export default {
       background-size: cover
       background-repeat: no-repeat
     .about
-      height: 100vh
+      height: 80vh
       background-color: white
       .line
         border: 1px solid #000000
@@ -105,4 +113,40 @@ export default {
                 width: 50%
               .value
                 width: 50%
+    .projects
+      background-color: black
+      display: flex
+      flex-direction: column
+      align-items: center
+      .left
+        background-image: url('../assets/project1.png')
+        margin: 10vh 0 11vh 20vw
+        height: 55vh
+        width: 55vw
+        background-size: cover
+      .right
+        background-image: url('../assets/project2.png')
+        margin: 10vh 20vw 11vh 0
+        height: 55vh
+        width: 55vw
+        background-size: cover
+    .other_works
+      background-image: url('../assets/other_works.png')
+      background-size: cover
+      display: flex
+      justify-content: center
+      height: 100vh
+      .inner-photo
+        width: 41vw
+        height: 38vh
+        margin: 36vh 0.5vw 11vh 0
+        background-image: url('../assets/project2.png')
+      .other
+        font-size: 5em
+        text-transform: uppercase
+        font-family: Angry
+        position: absolute
+        margin: 44vh 21vw 11vh 0
+        letter-spacing: 0.1em
+
 </style>
