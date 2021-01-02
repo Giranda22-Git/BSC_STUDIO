@@ -35,11 +35,11 @@ export default {
 
 <style lang="sass" scoped>
   .header
+    color: white
     font-family: SF Pro Display
     font-style: normal
     margin: 0
     padding: 0
-    width: 100vw
     height: 10vh
     display: flex
     flex-direction: row
@@ -60,7 +60,6 @@ export default {
         width: 20%
         font-weight: 400
         font-size: 1.3em
-        color: #FFFFFF
         text-align: center
       .rect
         display: flex

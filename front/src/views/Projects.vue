@@ -39,7 +39,6 @@
     </div>
     <div class="other_works">
       <div class="inner-photo"></div>
-      <div class="other">Другие кубики</div>
     </div>
   </div>
 </template>
@@ -65,6 +64,8 @@ export default {
         display: flex
         justify-content: space-around
         .Pr
+          color: transparent
+          -webkit-text-stroke: 1px white
           width: 10%
           font-size: 5em
           margin-top: 10%
@@ -88,6 +89,7 @@ export default {
         color: black
         display: flex
         flex-direction: row
+        height: 70vh
         .obzor-title
           font-size: 2em
           width: 25%
@@ -98,10 +100,12 @@ export default {
           flex-direction: column
           .info
             max-width: 80%
-            height: calc((100% / 3));
+            font-size: 130%
+            max-height: calc((100% / 5));
             margin-bottom: 5%
+            overflow: hidden
           .client
-            width: 20%
+            width: 40%
             display: flex
             flex-direction: column
             .client-info
@@ -132,21 +136,17 @@ export default {
         background-size: cover
     .other_works
       background-image: url('../assets/other_works.png')
-      background-size: cover
+      background-size: contain
+      height: 52.3vw
+      background-repeat: no-repeat
       display: flex
       justify-content: center
-      height: 100vh
       .inner-photo
-        width: 41vw
-        height: 38vh
-        margin: 36vh 0.5vw 11vh 0
+        width: 42%
+        height: 37%
+        margin: 18.3% 0.5% 11% 0
         background-image: url('../assets/project2.png')
-      .other
-        font-size: 5em
-        text-transform: uppercase
-        font-family: Angry
-        position: absolute
-        margin: 44vh 21vw 11vh 0
-        letter-spacing: 0.1em
+        background-size: contain
+        background-repeat: no-repeat
 
 </style>

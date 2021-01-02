@@ -34,7 +34,7 @@ export default {
       font-size: 6em
       position: absolute
       left: 2%
-      top: 70%
+      top: 60%
       color: white
       max-width: 40vw
       text-transform: uppercase;
