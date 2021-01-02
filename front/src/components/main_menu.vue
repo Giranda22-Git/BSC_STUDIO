@@ -1,7 +1,7 @@
 <template>
 <div class="main">
   <headerr />
-  <div class="text">Вне Представление</div>
+  <div class="text">Вне Воспрнятие</div>
   </div>
 </template>
 
@@ -38,6 +38,7 @@ export default {
       color: white
       max-width: 40vw
       text-transform: uppercase;
+      line-height: 80%
       font-family: Angry
 
 </style>
