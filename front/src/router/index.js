@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Projects from '../views/Projects.vue'
 import About from '../views/About.vue'
+import Kubiki from '../views/Kubiki_Iblaxa.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/about',
     name: 'about',
     component: About
+  },
+  {
+    path: '/kubiki',
+    name: 'kubiku',
+    component: Kubiki
   }
 ]
 
