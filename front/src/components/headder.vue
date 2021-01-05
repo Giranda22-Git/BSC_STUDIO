@@ -38,6 +38,7 @@ export default {
     color: white
     font-family: SF Pro Display
     font-style: normal
+    font-size: 1.8vw
     margin: 0
     padding: 0
     height: 10%
@@ -59,7 +60,6 @@ export default {
       .info
         width: 20%
         font-weight: 400
-        font-size: 1.3em
         text-align: center
       .rect
         display: flex

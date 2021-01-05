@@ -33,7 +33,7 @@ export default {
     background-image: url('../assets/other_works.png')
     background-size: contain
     background-repeat: no-repeat
-    height: 52.6vw
+    height: 52.9vw
     .text
       display: flex
       flex-direction: column
@@ -42,7 +42,7 @@ export default {
       .el
         color: transparent
         letter-spacing: 0.05em
-        -webkit-text-stroke: 1px white
+        -webkit-text-stroke: 0.4px white
         width: 60%
         font-size: 3vw
         margin-top: 2%
