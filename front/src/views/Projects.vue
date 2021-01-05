@@ -91,7 +91,7 @@ export default {
         flex-direction: row
         height: 70vh
         .obzor-title
-          font-size: 2em
+          font-size: 1.5em
           width: 25%
           margin-left: 5%
         .title-text
@@ -100,7 +100,7 @@ export default {
           flex-direction: column
           .info
             max-width: 80%
-            font-size: 130%
+            font-size: 0.7em
             max-height: calc((100% / 5));
             margin-bottom: 5%
             overflow: hidden
@@ -112,11 +112,13 @@ export default {
               display: flex
               flex-direction: row
               .name
+                font-size: 0.75em
                 font-weight: bold
                 float: left
                 width: 50%
               .value
                 width: 50%
+                font-size: 0.7em
     .projects
       background-color: black
       display: flex

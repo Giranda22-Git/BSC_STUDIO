@@ -58,14 +58,14 @@ export default {
       margin: 0 10% 4% 10%
     .info
       display: flex
-      height: 20vw
+      height: 20vh
       justify-content: space-around
       .info-item1
         width: 10%
         font-size: 1.6vw
         font-weight: bold
       .info-item2
-        font-size: 1.3vw
+        font-size: 0.7em
         width: 50%
     .photo
       background-image: url('../assets/photo_main.jpg')
@@ -75,21 +75,21 @@ export default {
     .text
       display: flex
       flex-direction: column
-      font-size: 1.1vw
+      font-size: 0.6em
       .text-item1
         margin-left: 10vw
         margin-top: 8vh
-        max-width: 30vw
+        max-width: 40vw
         line-height: 1.5
       .text-item2
         margin-top: 8vh
         margin-left: 10vw
-        max-width: 40vw
+        max-width: 50vw
         line-height: 1.5
       .text-item3
         margin-top: 8vh
         margin-left: 10vw
         margin-bottom: 8vh
-        max-width: 45vw
+        max-width: 55vw
         line-height: 1.5
 </style>
