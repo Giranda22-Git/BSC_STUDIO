@@ -96,7 +96,8 @@ async function init(serverData) {
                 result: true,
                 phoneNumber: '+7(705)-553-99-66',
                 userName: 'Administrator',
-                message: telegramMessage.substr(telegramMessage.indexOf(';') + 2)
+                message: telegramMessage.substr(telegramMessage.indexOf(';') + 2),
+                timestamp: new Date()
               }
             }))
             ctx.reply('сообщение успешно отправлено')
@@ -119,7 +120,7 @@ async function init(serverData) {
         if (msg.action === 'check') {
           // -423939146
           bot.telegram.sendMessage('-358075072',
-            `new message sended from\nuid: ${newConnection.uid}\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
+            `new message sended from\nuid: ${newConnection.uid}\ndate: ${data.timestamp}\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
           )
         }
         else if (msg.action === 'message') {
@@ -140,7 +141,7 @@ async function init(serverData) {
       // event on user disconnection
       ws.on('close', () => {
         clients.delete(newConnection)
-        console.log(`deleted: ${ws}`, clients)
+        console.log(`deleted: ${newConnection.uid}`)
       })
     })
     bot.launch()

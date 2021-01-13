@@ -2,24 +2,24 @@
   <div class="wrapper">
     <div class="helper-agent">
       <div class="avatar"></div>
-      <div class="naming">{{ trustedMessage.data.message }}</div>
+      <div class="naming">Administrator</div>
     </div>
     <div class="regForm" v-show="isAuth">
       <input v-model="userName" type="text" placeholder="Username">
       <input v-model="phone" type="phone" placeholder="Phone" @keypress.enter="reg">
       <button @click="reg">send</button>
-      {{ trustedMessage }}
     </div>
     <div class="chat-list" v-show="!isAuth">
       <div class="message"
         v-for="(message, index) in user.messages"
         :key="message + index"
       >
-        {{ message }}
+        {{ message.data.message }}
+        {{ message.data.timestamp.toLocaleString("ru") }}
       </div>
     </div>
     <div class="message-input">
-      <input v-model="message" type="text" name="message" id="message" @keypress.enter="send">
+      <input v-model="inputMessage" type="text" name="message" id="message" @keypress.enter="send">
       <button @click="send">></button>
     </div>
   </div>
@@ -27,11 +27,13 @@
 
 <script>
 import axios from 'axios'
-const connection = new WebSocket('ws://192.168.1.154:1000/')
+const connection = new WebSocket('ws://192.168.110.26:1000/')
+//  { "result": true, "phoneNumber": "+7(705)-553-99-66", "userName": "Administrator", "message": "hello" }
+//  { "action": "sendMessage", "agent": "telegram", "data": { "result": true, "phoneNumber": "+7(705)-553-99-66", "userName": "Administrator", "message": "hello" } }
 export default {
   name: 'chatHelper',
   data: () => ({
-    message: null,
+    inputMessage: null,
     phone: null,
     userName: null,
     user: {
@@ -48,6 +50,7 @@ export default {
     connection.onmessage = (msg) => {
       console.log(JSON.parse(msg.data))
       this.trustedMessage = JSON.parse(msg.data)
+      this.user.messages.push(JSON.parse(msg.data))
     }
     connection.onerror = (err) => {
       console.log(err)
@@ -59,7 +62,7 @@ export default {
         userName: this.userName,
         phoneNumber: this.phone
       }
-      await axios.post('http://192.168.1.154:3000/messages', params)
+      await axios.post('http://192.168.110.26:3000/messages', params)
         .then(response => {
           if (response.status === 200) {
             this.user = response.data
@@ -71,17 +74,19 @@ export default {
         })
     },
     async send () {
-      const params = JSON.stringify({
+      const params = {
         action: 'check',
         agent: 'client',
         data: {
           userName: this.userName,
           phoneNumber: this.phone,
-          message: this.message
+          timestamp: new Date(),
+          message: this.inputMessage
         }
-      })
+      }
       console.log(params)
-      connection.send(params)
+      this.user.messages.push(params)
+      connection.send(JSON.stringify(params))
     }
   }
 }
