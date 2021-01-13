@@ -34,9 +34,9 @@ async function init(serverData) {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  
+
   mongoose.connection.once('open', () => {
-    app.listen(serverData.PORT, (err) => {
+    app.listen(serverData.PORT, '0.0.0.0', (err) => {
       if (err) return new Error(`error in starting server, error: ${err}`)
       else console.log(`server started on \nPORT: ${serverData.PORT}\nURL: ${serverData.serverUrl}`)
     })
@@ -48,18 +48,38 @@ async function init(serverData) {
     // chat id -423939146
     const bot = new telegraf('1486601848:AAF6cLztC7SlVfGV1Epal3N6tVfJVHZ245A')
     bot.start((ctx) => {
-      console.log(ctx.update.message.chat)
       ctx.reply('Welcome')
     })
-    bot.help((ctx) => ctx.reply('Send me a sticker'))
-    
-    //bot.telegram.sendMessage('-423939146', 'Hi guys')
+
+    // command count of users
+    bot.command('countOfUsers', (ctx) => {
+      ctx.reply(clients.size)
+    })
+
+    //command array all users
+    bot.command('allUsers', (ctx) => {
+      if (clients.size !== 0) {
+        let allUsersId = new String()
+
+        clients.forEach(client => {
+          allUsersId += client.uid + '\n'
+        })
+
+        ctx.reply(allUsersId)
+      } else {
+        ctx.reply('users count of zero')
+      }
+    })
+
+    // error truster
     wss.on('error', err => {
       console.log(err)
     })
+
+    // event on connection
     wss.on('connection', async ws => {
       const newConnection = {
-        uid: uid(16),
+        uid: uid(4),
         connection: ws
       }
       clients.add(newConnection)
@@ -67,7 +87,6 @@ async function init(serverData) {
       bot.command('send', (ctx) => {
         const telegramMessage = ctx.message.text.replace('/send', '')
         const queryConnectionUID = telegramMessage.substr(telegramMessage.indexOf('uid: ') + 5, telegramMessage.indexOf(';') - 6)
-        ctx.reply(queryConnectionUID)
         clients.forEach(client => {
           if (client.uid === queryConnectionUID) {
             client.connection.send(JSON.stringify({
@@ -80,8 +99,14 @@ async function init(serverData) {
                 message: telegramMessage.substr(telegramMessage.indexOf(';') + 2)
               }
             }))
+            ctx.reply('сообщение успешно отправлено')
           } else {
-            ctx.reply(`uid is wrong; ${client.uid} != ${queryConnectionUID}`)
+            const allClientsId = new Array()
+            clients.forEach(client => {
+              allClientsId.push(client.uid)
+            })
+            if (!allClientsId.includes(queryConnectionUID))
+              ctx.reply(`uid is wrong; ${client.uid} != ${queryConnectionUID}`)
           }
         })
       })
@@ -92,7 +117,8 @@ async function init(serverData) {
         const data = msg.data
 
         if (msg.action === 'check') {
-          bot.telegram.sendMessage('-423939146', 
+          // -423939146
+          bot.telegram.sendMessage('-358075072',
             `new message sended from\nuid: ${newConnection.uid}\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
           )
         }
@@ -111,13 +137,13 @@ async function init(serverData) {
         }
       })
 
+      // event on user disconnection
       ws.on('close', () => {
-        clients.delete(ws)
+        clients.delete(newConnection)
         console.log(`deleted: ${ws}`, clients)
       })
     })
     bot.launch()
   })
   mongoose.connection.emit('open')
-  
 }

@@ -2,13 +2,13 @@
   <div class="wrapper">
     <div class="helper-agent">
       <div class="avatar"></div>
-      <div class="naming">Administrator</div>
+      <div class="naming">{{ trustedMessage.data.message }}</div>
     </div>
     <div class="regForm" v-show="isAuth">
-      {{ trustedMessage }}
       <input v-model="userName" type="text" placeholder="Username">
       <input v-model="phone" type="phone" placeholder="Phone" @keypress.enter="reg">
       <button @click="reg">send</button>
+      {{ trustedMessage }}
     </div>
     <div class="chat-list" v-show="!isAuth">
       <div class="message"
@@ -27,7 +27,7 @@
 
 <script>
 import axios from 'axios'
-const connection = new WebSocket('ws://localhost:1000')
+const connection = new WebSocket('ws://192.168.1.154:1000/')
 export default {
   name: 'chatHelper',
   data: () => ({
@@ -38,7 +38,11 @@ export default {
       messages: []
     },
     isAuth: true,
-    trustedMessage: null
+    trustedMessage: {
+      data: {
+        message: 'Administrator'
+      }
+    }
   }),
   mounted () {
     connection.onmessage = (msg) => {
@@ -55,7 +59,7 @@ export default {
         userName: this.userName,
         phoneNumber: this.phone
       }
-      await axios.post('http://localhost:3000/messages', params)
+      await axios.post('http://192.168.1.154:3000/messages', params)
         .then(response => {
           if (response.status === 200) {
             this.user = response.data
@@ -134,7 +138,7 @@ export default {
         cursor: pointer
     .message-input
       width: 90%
-      height: 5%
+      height: 10%
       display: flex
       justify-content: center
       align-items: center
