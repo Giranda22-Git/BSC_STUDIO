@@ -19,7 +19,19 @@ router.post('/', async (req, res) => {
     else {
         const newMessages = new mongoMessages({
             userName: data.userName,
-            phoneNumber: data.phoneNumber
+            phoneNumber: data.phoneNumber,
+            messages: [
+                {
+                    action: 'created',
+                    agent: 'server',
+                    data: {
+                        userName: data.userName,
+                        phoneNumber: data.phoneNumber,
+                        message: "Мы ответим вам в течении 10 минут",
+                        timestamp: new Date()
+                    }
+                }
+            ]
         })
         const result = await newMessages.save()
         res.status(200).json(result)

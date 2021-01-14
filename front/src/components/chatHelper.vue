@@ -48,9 +48,11 @@ export default {
   }),
   mounted () {
     connection.onmessage = (msg) => {
-      console.log(JSON.parse(msg.data))
-      this.trustedMessage = JSON.parse(msg.data)
-      this.user.messages.push(JSON.parse(msg.data))
+      const data = JSON.parse(msg.data)
+      if (data.action !== 'replyMessage') data.data.timestamp = new Date(data.data.timestamp)
+      this.trustedMessage = data
+      console.log(data)
+      this.user.messages.push(data)
     }
     connection.onerror = (err) => {
       console.log(err)
@@ -65,6 +67,7 @@ export default {
       await axios.post('http://192.168.110.26:3000/messages', params)
         .then(response => {
           if (response.status === 200) {
+            console.log(response.data)
             this.user = response.data
             this.isAuth = false
           }
@@ -74,8 +77,8 @@ export default {
         })
     },
     async send () {
-      const params = {
-        action: 'check',
+      const params = JSON.stringify({
+        action: 'message',
         agent: 'client',
         data: {
           userName: this.userName,
@@ -83,10 +86,8 @@ export default {
           timestamp: new Date(),
           message: this.inputMessage
         }
-      }
-      console.log(params)
-      this.user.messages.push(params)
-      connection.send(JSON.stringify(params))
+      })
+      connection.send(params)
     }
   }
 }

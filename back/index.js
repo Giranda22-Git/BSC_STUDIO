@@ -89,17 +89,17 @@ async function init(serverData) {
         const queryConnectionUID = telegramMessage.substr(telegramMessage.indexOf('uid: ') + 5, telegramMessage.indexOf(';') - 6)
         clients.forEach(client => {
           if (client.uid === queryConnectionUID) {
-            client.connection.send(JSON.stringify({
+            const newTelegramMessage = {
               action: 'sendMessage',
               agent: 'telegram',
               data: {
-                result: true,
                 phoneNumber: '+7(705)-553-99-66',
                 userName: 'Administrator',
                 message: telegramMessage.substr(telegramMessage.indexOf(';') + 2),
                 timestamp: new Date()
               }
-            }))
+            }
+            client.connection.send(JSON.stringify(newTelegramMessage))
             ctx.reply('сообщение успешно отправлено')
           } else {
             const allClientsId = new Array()
@@ -117,24 +117,25 @@ async function init(serverData) {
         msg = JSON.parse(msg)
         const data = msg.data
 
-        if (msg.action === 'check') {
-          // -423939146
-          bot.telegram.sendMessage('-358075072',
-            `new message sended from\nuid: ${newConnection.uid}\ndate: ${data.timestamp}\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
-          )
-        }
-        else if (msg.action === 'message') {
-          const result = await mongoMessages.updateOne({ phoneNumber: data.phoneNumber }, {$push: { messages: data.message }})
-          ws.send(JSON.stringify({
-            action: 'sendMessage',
+        if (msg.action === 'message') {
+          const newMessage = {
+            action: 'replyMessage',
             agent: 'server',
             data: {
-              result: result,
               phoneNumber: data.phoneNumber,
               userName: data.userName,
-              message: data.message
+              message: data.message,
+              timestamp: new Date()
             }
-          }))
+          }
+
+          newMessage.data.result = await mongoMessages.updateOne({ phoneNumber: data.phoneNumber }, {$push: { messages: newMessage }})
+
+          ws.send(JSON.stringify(newMessage))
+
+          bot.telegram.sendMessage('-358075072',
+            `new message sended from\nuid: ${newConnection.uid}\ndate: ${data.timestamp.toLocaleString("ru")}\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
+          )
         }
       })
 
