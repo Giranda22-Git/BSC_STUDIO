@@ -38,4 +38,25 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.post('/messageFromAdmin', async (req, res) => {
+    const data = req.body
+    console.log(data, data.data)
+    const query = await mongoMessages.findOne({ phoneNumber: data.phoneNumber }).exec()
+    if (query !== null) {
+        const newMessage = {
+            action: 'saveAdminMessage',
+            agent: 'telegram',
+            data: {
+              phoneNumber: data.data.data.phoneNumber,
+              userName: data.data.data.userName,
+              message: data.data.data.message,
+              timestamp: new Date()
+            }
+        }
+        const result = await mongoMessages.updateOne({ phoneNumber: data.phoneNumber }, {$push: { messages: newMessage }})
+        if (result.ok) res.status(200).json(newMessage)
+        else res.sendStatus(500)
+    } else res.status(404).json(query)
+})
+
 module.exports = router

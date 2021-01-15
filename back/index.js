@@ -90,7 +90,7 @@ async function init(serverData) {
         clients.forEach(client => {
           if (client.uid === queryConnectionUID) {
             const newTelegramMessage = {
-              action: 'sendMessage',
+              action: 'saveFromAdminMessage',
               agent: 'telegram',
               data: {
                 phoneNumber: '+7(705)-553-99-66',
@@ -116,7 +116,7 @@ async function init(serverData) {
       ws.on('message', async msg => {
         msg = JSON.parse(msg)
         const data = msg.data
-
+        data.timestamp = new Date()
         if (msg.action === 'message') {
           const newMessage = {
             action: 'replyMessage',
