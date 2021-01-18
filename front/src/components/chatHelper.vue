@@ -14,8 +14,20 @@
         v-for="(message, index) in user.messages"
         :key="message + index"
       >
-        {{ message.data.message }}
-        {{ message.data.timestamp.toLocaleString("ru") }}
+        <div class="senderAvatar"></div>
+        <div class="bandleFix">
+          <div class="messageBandle">
+            <div class="username">
+              {{ message.data.userName }}
+            </div>
+            <div class="timestamp">
+              {{ message.data.timestamp.toLocaleString("ru") }}
+            </div>
+          </div>
+          <div class="messageBody">
+            {{ message.data.message }}
+          </div>
+        </div>
       </div>
     </div>
     <div class="message-input">
@@ -27,7 +39,7 @@
 
 <script>
 import axios from 'axios'
-const connection = new WebSocket('ws://192.168.110.55:1000/')
+const connection = new WebSocket('ws://192.168.110.26:1000/')
 //  { "result": true, "phoneNumber": "+7(705)-553-99-66", "userName": "Administrator", "message": "hello" }
 //  { "action": "sendMessage", "agent": "telegram", "data": { "result": true, "phoneNumber": "+7(705)-553-99-66", "userName": "Administrator", "message": "hello" } }
 export default {
@@ -56,7 +68,7 @@ export default {
           data: data,
           phoneNumber: this.phone
         }
-        await axios.post('http://192.168.110.55:3000/messages/messageFromAdmin', params)
+        await axios.post('http://192.168.110.26:3000/messages/messageFromAdmin', params)
           .then(response => {
             if (response.status === 200) {
               console.log(response.data)
@@ -80,10 +92,13 @@ export default {
         userName: this.userName,
         phoneNumber: this.phone
       }
-      await axios.post('http://192.168.110.55:3000/messages', params)
+      await axios.post('http://192.168.110.26:3000/messages', params)
         .then(response => {
           if (response.status === 200) {
             console.log(response.data)
+            response.data.messages.forEach(element => {
+              element.data.timestamp = new Date(element.data.timestamp)
+            })
             this.user = response.data
             this.isAuth = false
           }
@@ -109,6 +124,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  @font-face
+    src: url(../assets/angryFont/Angry.otf)
+    font-family: Angry
   .wrapper
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, .3)
     border-top-left-radius: 20px
@@ -127,8 +145,8 @@ export default {
       justify-content: space-evenly
       align-items: center
       .avatar
-        width: 5vh
-        height: 5vh
+        width: 8%
+        padding-bottom: 8%
         border-radius: 50%
         background: url(../assets/avatar.jpeg) center no-repeat
         background-size: cover
@@ -140,6 +158,43 @@ export default {
       width: 90%
       height: 80%
       transition: 1s
+      overflow-y: auto
+      .message
+        width: 100%
+        min-height: 20%
+        height: auto
+        display: flex
+        justify-content: space-between
+        align-items: center
+        .senderAvatar
+          width: 12%
+          padding-bottom: 12%
+          border-radius: 50%
+          background: linear-gradient(180deg, #0062D5 0%, #A76868 100%)
+        .bandleFix
+          width: 85%
+          height: auto
+          .messageBandle
+            width: 100%
+            display: flex
+            justify-content: space-between
+            align-items: center
+            .username
+              width: 100%
+              font-family: Angry
+              font-weight: 400
+              font-size: 1.5rem
+            .timestamp
+              font-size: 1.2rem
+              white-space: nowrap
+              font-weight: 700
+          .messageBody
+            width: 100%
+            height: auto
+            padding-top: 2%
+            font-family: Roboto
+            font-weight: 900
+            font-size: 1.3rem
     .regForm
       width: 90%
       height: 80%

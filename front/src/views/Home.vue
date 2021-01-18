@@ -18,6 +18,6 @@ export default {
   .wrapper
     width: 100%
     #chatHelper
-      width: 70%
-      height: 70vh
+      width: 30%
+      height: 50vh
 </style>
