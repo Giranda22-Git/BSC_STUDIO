@@ -94,7 +94,7 @@ async function init(serverData) {
               agent: 'telegram',
               data: {
                 phoneNumber: '+7(705)-553-99-66',
-                userName: 'Administrator',
+                userName: 'BSC STUDIO',
                 message: telegramMessage.substr(telegramMessage.indexOf(';') + 2),
                 timestamp: new Date()
               }

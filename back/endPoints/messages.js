@@ -25,8 +25,8 @@ router.post('/', async (req, res) => {
                     action: 'created',
                     agent: 'server',
                     data: {
-                        userName: data.userName,
-                        phoneNumber: data.phoneNumber,
+                        userName: 'BSC STUDIO',
+                        phoneNumber: '+7(705)-553-99-66',
                         message: "Мы ответим вам в течении 10 минут",
                         timestamp: new Date()
                     }

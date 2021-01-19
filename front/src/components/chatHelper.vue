@@ -1,23 +1,27 @@
 <template>
   <div class="wrapper">
-    <div class="helper-agent">
+    <!-- <div class="helper-agent">
       <div class="avatar"></div>
-      <div class="naming">Administrator</div>
-    </div>
+      <div class="naming">BSC STUDIO</div>
+    </div> -->
     <div class="regForm" v-show="isAuth">
       <input v-model="userName" type="text" placeholder="Username">
       <input v-model="phone" type="phone" placeholder="Phone" @keypress.enter="reg">
       <button @click="reg">send</button>
     </div>
-    <div class="chat-list" v-show="!isAuth">
+    <div class="chat-list" v-show="!isAuth" v-chat-scroll="{smooth: true, notSmoothOnInit: true}">
       <div class="message"
         v-for="(message, index) in user.messages"
         :key="message + index"
       >
-        <div class="senderAvatar"></div>
+        <div v-bind:class="{ 'senderAvatarAdmin': message.data.userName === 'BSC STUDIO', 'senderAvatar': message.data.userName !== 'BSC STUDIO' }">
+          <span>
+            {{ message.data.userName.charAt(0) }}
+          </span>
+        </div>
         <div class="bandleFix">
           <div class="messageBandle">
-            <div class="username">
+            <div class="username" v-bind:class="{ 'senderMessageAdmin': message.data.userName === 'BSC STUDIO', 'senderMessage': message.data.userName !== 'BSC STUDIO' }">
               {{ message.data.userName }}
             </div>
             <div class="timestamp">
@@ -31,8 +35,16 @@
       </div>
     </div>
     <div class="message-input">
-      <input v-model="inputMessage" type="text" name="message" id="message" @keypress.enter="send">
-      <button @click="send">></button>
+      <hr>
+      <div class="form">
+        <input v-model="inputMessage" type="text" name="message" id="message" @keypress.enter="send" placeholder="      Сообщение...">
+        <button @click="send">
+          <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.0041 19L11 9.99995L0.999998 1" stroke="black"/>
+</svg>
+
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -138,27 +150,20 @@ export default {
     flex-direction: column
     justify-content: center
     align-items: center
-    .helper-agent
-      width: 90%
-      height: 10%
-      display: flex
-      justify-content: space-evenly
-      align-items: center
-      .avatar
-        width: 8%
-        padding-bottom: 8%
-        border-radius: 50%
-        background: url(../assets/avatar.jpeg) center no-repeat
-        background-size: cover
-      .naming
-        width: 80%
-        font-size: 2rem
-        opacity: .7
     .chat-list
-      width: 90%
+      width: 95%
       height: 80%
       transition: 1s
       overflow-y: auto
+      &::-webkit-scrollbar-track
+        border-radius: 4px
+      &::-webkit-scrollbar
+        width: 3px
+      &::-webkit-scrollbar-thumb
+        border-radius: 4px
+        background: #0062D4
+      &:hover::-webkit-scrollbar-thumb
+        background: rgba(#0062D4, .8)
       .message
         width: 100%
         min-height: 20%
@@ -166,11 +171,31 @@ export default {
         display: flex
         justify-content: space-between
         align-items: center
+        padding-left: 2%
+        padding-top: 2%
+        padding-right: 1%
+        .senderAvatarAdmin
+          width: 12%
+          padding-bottom: 12%
+          border-radius: 50%
+          background: linear-gradient(180deg, #47C8FF 0%, #3A52FE 100%)
+          position: relative
+          box-shadow: 0px -2px 15px 1px #3A52FE
         .senderAvatar
           width: 12%
           padding-bottom: 12%
           border-radius: 50%
-          background: linear-gradient(180deg, #0062D5 0%, #A76868 100%)
+          background: linear-gradient(-55deg, #0062D5 0%, #A76868 90%)
+          position: relative
+        span
+          position: absolute
+          left: 50%
+          top: 50%
+          transform: translate(-50%, -45%)
+          font-size: 2rem
+          color: white
+          font-family: Angry
+          font-weight: 400
         .bandleFix
           width: 85%
           height: auto
@@ -179,6 +204,10 @@ export default {
             display: flex
             justify-content: space-between
             align-items: center
+            .senderMessage
+              color: #816781
+            .senderMessageAdmin
+              color: #4296FF
             .username
               width: 100%
               font-family: Angry
@@ -192,11 +221,11 @@ export default {
             width: 100%
             height: auto
             padding-top: 2%
-            font-family: Roboto
-            font-weight: 900
+            font-family: sans-serif
+            font-weight: 600
             font-size: 1.3rem
     .regForm
-      width: 90%
+      width: 95%
       height: 80%
       display: flex
       flex-direction: column
@@ -213,20 +242,33 @@ export default {
         border: none
         cursor: pointer
     .message-input
-      width: 90%
-      height: 10%
+      width: 95%
+      height: 20%
       display: flex
-      justify-content: center
+      flex-direction: column
+      justify-content: space-between
       align-items: center
-      input
-        width: 85%
-        height: 100%
-        font-size: 1.5rem
-      button
-        width: 15%
-        height: 100%
-        font-size: 1.5rem
-        background-color: transparent
-        border: none
-        cursor: pointer
+      hr
+        width: 100%
+        height: 3px
+        margin: 0
+      .form
+        width: 100%
+        height: 80%
+        input
+          width: 93%
+          height: 100%
+          font-size: 1.5rem
+          border: none
+          outline: none
+          &::focus
+            background: none
+        button
+          width: 7%
+          height: 100%
+          font-size: 1.5rem
+          background-color: transparent
+          border: none
+          cursor: pointer
+          padding: 0
 </style>
