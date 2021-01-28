@@ -236,6 +236,8 @@ export default {
         width: 90%
         height: 7%
         margin-bottom: 10%
+        -webkit-box-shadow: inset 0 0 0 50px #fff
+        -webkit-text-fill-color: #000
       button
         font-size: 1.5rem
         background-color: transparent
@@ -261,6 +263,8 @@ export default {
           font-size: 1.5rem
           border: none
           outline: none
+          -webkit-box-shadow: inset 0 0 0 50px #fff
+          -webkit-text-fill-color: #000
           &::focus
             background: none
         button
