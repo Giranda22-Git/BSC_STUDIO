@@ -51,7 +51,7 @@
 
 <script>
 import axios from 'axios'
-const connection = new WebSocket('ws://192.168.110.26:1000/')
+const connection = new WebSocket('ws://192.168.1.154:1000/')
 //  { "result": true, "phoneNumber": "+7(705)-553-99-66", "userName": "Administrator", "message": "hello" }
 //  { "action": "sendMessage", "agent": "telegram", "data": { "result": true, "phoneNumber": "+7(705)-553-99-66", "userName": "Administrator", "message": "hello" } }
 export default {
@@ -80,7 +80,7 @@ export default {
           data: data,
           phoneNumber: this.phone
         }
-        await axios.post('http://192.168.110.26:3000/messages/messageFromAdmin', params)
+        await axios.post('http://192.168.1.154:3000/messages/messageFromAdmin', params)
           .then(response => {
             if (response.status === 200) {
               console.log(response.data)
@@ -104,7 +104,7 @@ export default {
         userName: this.userName,
         phoneNumber: this.phone
       }
-      await axios.post('http://192.168.110.26:3000/messages', params)
+      await axios.post('http://192.168.1.154:3000/messages', params)
         .then(response => {
           if (response.status === 200) {
             console.log(response.data)

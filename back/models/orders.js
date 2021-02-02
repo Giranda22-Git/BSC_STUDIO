@@ -42,5 +42,5 @@ const order = new mongoose.Schema({
     }
 })
 
-const messages = mongoose.model('messages', message)
-module.exports = messages
+const orders = mongoose.model('orders', order)
+module.exports = orders
