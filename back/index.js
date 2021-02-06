@@ -17,7 +17,6 @@ const serverData = {
 
 const app = express()
 const mongoMessages = require('./models/messages.js')
-const { request } = require('http')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -76,7 +75,7 @@ async function init(serverData) {
     })
 
     bot.hears('all users chat with phone number', async (ctx) => {
-      const allChats = await mongoMessages.find({ phoneNumber: '+77055539966' })
+      const allChats = await mongoMessages.find()
       console.log('check',allChats[allChats.length - 1].messages.length)
       const keyboardArray = new Array()
       allChats.forEach(chat => {
