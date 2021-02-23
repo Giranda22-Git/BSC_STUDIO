@@ -1,15 +1,18 @@
 <template>
   <div class="wrapper">
+    <Header />
     <chatHelper id="chatHelper" />
   </div>
 </template>
 
 <script>
 import chatHelper from '@/components/chatHelper.vue'
+import Header from '@/components/Header.vue'
 export default {
   name: 'Home',
   components: {
-    chatHelper
+    chatHelper,
+    Header
   }
 }
 </script>
