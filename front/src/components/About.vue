@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="image_wrap">
       <div class="left">
-      <img src="@/assets/About.png" class="image_bsc">
+      <img src="@/assets/mainPage/About.png" class="image_bsc">
      </div>
      <div class="right"></div>
     </div>
