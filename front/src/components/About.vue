@@ -26,12 +26,16 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap')
   .wrapper
     width: 100vw
-    height: 100vh
+    height: 104vh
     background-color: black
     display: flex
     flex-direction: column
     .image_wrap
       height: 75%
+      .left
+      height: 83%
+      background-color: black
+      width: 100%
     .bot_block
       height: 25%
       width: 100%
@@ -59,6 +63,9 @@ export default {
           font-size: 1.5vh
           color: white
   @media screen and ( max-width: 1024px )
+    .image_bsc
+      width: 100% !important
+      height: 80% !important
     .text_wrap
       flex-direction: column !important
       .right_text
