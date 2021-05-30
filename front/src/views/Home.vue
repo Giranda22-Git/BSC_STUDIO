@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    <chatHelper />
     <theHeader />
     <About />
     <About2 />
@@ -11,14 +10,12 @@
 import theHeader from '@/components/theHeader.vue'
 import About from '@/components/About.vue'
 import About2 from '@/components/About2.vue'
-import chatHelper from '@/components/chatHelper.vue'
 export default {
   name: 'Home',
   components: {
     theHeader,
     About,
-    About2,
-    chatHelper
+    About2
   }
 }
 </script>

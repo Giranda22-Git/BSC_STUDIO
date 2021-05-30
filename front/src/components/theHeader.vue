@@ -43,8 +43,8 @@ export default {
         this.$refs.secondLine.style.transform = 'rotate(0deg) translateY(0vw)'
         this.burgerMenuStatus = false
       } else {
-        this.$refs.firstLine.style.transform = 'rotate(45deg) translateY(.36vw)'
-        this.$refs.secondLine.style.transform = 'rotate(-45deg) translateY(-.36vw)'
+        this.$refs.firstLine.style.transform = 'rotate(45deg) translateY(.40vw)'
+        this.$refs.secondLine.style.transform = 'rotate(-45deg) translateY(-.40vw)'
         this.burgerMenuStatus = true
       }
     }
