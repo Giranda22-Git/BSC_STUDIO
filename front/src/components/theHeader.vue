@@ -16,9 +16,9 @@
             <li>
               О Нас
             </li>
-            <li class="burgerBTN" @click="burgerAnim">
-              <div class="firstLine" ref="firstLine"></div>
-              <div class="secondLine" ref="secondLine"></div>
+            <li class="burgerBTN" ref="burgerBTN" @click="burgerAnim">
+              <div ref="firstLine" class="firstLine"></div>
+              <div ref="secondLine" class="secondLine"></div>
             </li>
           </ul>
         </div>
@@ -39,12 +39,12 @@ export default {
   methods: {
     burgerAnim () {
       if (this.burgerMenuStatus) {
-        this.$refs.firstLine.style.transform = 'rotate(0deg) translateY(0vw)'
-        this.$refs.secondLine.style.transform = 'rotate(0deg) translateY(0vw)'
+        this.$refs.firstLine.style.transform = 'rotate(0deg) translate(0,4px)'
+        this.$refs.secondLine.style.transform = 'rotate(0deg) translate(0,-4px)'
         this.burgerMenuStatus = false
       } else {
-        this.$refs.firstLine.style.transform = 'rotate(45deg) translateY(.40vw)'
-        this.$refs.secondLine.style.transform = 'rotate(-45deg) translateY(-.40vw)'
+        this.$refs.firstLine.style.transform = 'rotate(45deg) translate(0px, 0px)'
+        this.$refs.secondLine.style.transform = 'rotate(-45deg) translate(0px, -0px)'
         this.burgerMenuStatus = true
       }
     }
@@ -109,16 +109,22 @@ export default {
               align-items: center
               cursor: pointer
             .burgerBTN
-              width: 2.2vw
-              height: 1.5vw
+              position: relative
+              width: 80px
+              height: 80px
               display: flex
-              flex-direction: column
               justify-content: space-evenly
               align-items: center
               .firstLine, .secondLine
-                width: 100%
+                position: absolute
+                width: 45px
                 height: 1px
                 background-color: #fff
-                transition: .5s
+                transition: all .4s ease-in-out
+                border-radius: 1px
+              .firstLine
+                transform: translateY(4px)
+              .secondLine
+                transform: translateY(-4px)
 
 </style>
