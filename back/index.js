@@ -9,11 +9,7 @@ const telegraf = require('telegraf')
 const {uid} = require('uid')
 const fs = require('fs')
 
-const serverData = {
-  mongoUrl: 'mongodb://localhost:27017/BSC_STUDIO',
-  serverUrl: 'http://localhost:3000/',
-  PORT: 3000
-}
+const serverData = require('./staticData/mountedData.js')
 
 const app = express()
 const mongoMessages = require('./models/messages.js')
@@ -43,7 +39,6 @@ async function init(serverData) {
     })
 
     app.use('/messages', require('./endPoints/messages.js'))
-    //app.use('/auctions', require('./endPoints/auctions.js'))
 
     // telegram bot
     // chat id -423939146
@@ -157,14 +152,39 @@ messages: \n`
     })
 
     // event on connection
-    wss.on('connection', async ws => {
+    wss.on('connection', async (ws, data) => {
       const newConnection = {
         uid: uid(4),
-        connection: ws
+        connection: ws,
+        phoneNumber: data.url.substring(1)
       }
       clients.add(newConnection)
       console.log(`connected: ${newConnection.uid}`)
-      bot.command('send', (ctx) => {
+      bot.on('message', (ctx) => {
+        console.log(ctx.message)
+
+        if (ctx.message.reply_to_message) {
+          const replyMessage = ctx.message.reply_to_message.text
+          const replyPhoneNumber = replyMessage.substring(replyMessage.indexOf('phone: ') + 7, replyMessage.indexOf('phone: ') + 7 + 12)
+          
+          const MessageForSendAdminUser = {
+            action: 'saveFromAdminMessage',
+            agent: 'telegram',
+            data: {
+              phoneNumber: '+7(705)-553-99-66',
+              userName: 'BSC STUDIO',
+              message: ctx.message.text,
+              timestamp: new Date()
+            }
+          }
+
+          for (let clientForSendAdminUser of clients) {
+            if (clientForSendAdminUser.phoneNumber === replyPhoneNumber) {
+              clientForSendAdminUser.connection.send(JSON.stringify(MessageForSendAdminUser))
+            }
+          }
+        }
+
         const telegramMessage = ctx.message.text.replace('/send', '')
         const queryConnectionUID = telegramMessage.substr(telegramMessage.indexOf('uid: ') + 5, telegramMessage.indexOf(';') - 6)
         clients.forEach(client => {
@@ -213,7 +233,7 @@ messages: \n`
 
           ws.send(JSON.stringify(newMessage))
 
-          bot.telegram.sendMessage('-358075072',
+          bot.telegram.sendMessage('-411803300',
             `new message sended from\nuid: ${newConnection.uid}\ndate: ${data.timestamp.toLocaleString("ru")}\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
           )
         }
