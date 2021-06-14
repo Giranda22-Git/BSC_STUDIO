@@ -5,9 +5,9 @@ const cors = require('cors')
 const multer = require('multer')
 const WebSocket = require('ws')
 const wss = new WebSocket.Server({ port: 1000 })
-const telegraf = require('telegraf')
 const {uid} = require('uid')
 const fs = require('fs')
+const axios = require('axios')
 
 const serverData = require('./staticData/mountedData.js')
 
@@ -42,12 +42,48 @@ async function init(serverData) {
 
     // telegram bot
     // chat id -423939146
-    const bot = new telegraf('1486601848:AAF6cLztC7SlVfGV1Epal3N6tVfJVHZ245A')
+    const bot = require('./botCommands/bot_connect.js')
 
-    bot.start((ctx) => {
-      ctx.reply('started choose keyboard\n/messages\n/orders')
+    require('./botCommands/start.js')
+    require('./botCommands/jobRequest.js')
+    require('./botCommands/accessJobRequest.js')
+    require('./botCommands/getJobRequests.js')
+    require('./botCommands/getUsers.js')
+    require('./botCommands/createOrder.js')
+    require('./botCommands/endCreateOrder.js')
+
+
+    bot.on('document', async (ctx) => {
+      const fileExtension = ctx.update.message.document.file_name.split('.')[1]
+      const {file_id: fileId} = ctx.update.message.document
+      ctx.telegram.getFileLink(fileId)
+        .then(url => {
+          axios({url, responseType: 'stream'}).then(response => {
+            return new Promise(() => {
+              response.data.pipe(fs.createWriteStream(`${__dirname}/tmp/technicalTasks/${ctx.update.message.from.id}.${fileExtension}`))
+                .on('finish', () => ctx.reply('файл успешно сохранен'))
+                .on('error', () => ctx.reply('произошла какая то ошибка'))
+            })
+          })
+        })
+    });
+
+    bot.on('photo', async (ctx) => {
+      console.log(ctx.update.message.photo[3])
+      const {file_id: fileId} = ctx.update.message.photo[3]
+      ctx.telegram.getFileLink(fileId)
+        .then(url => {
+          axios({url, responseType: 'stream'}).then(response => {
+            return new Promise(() => {
+              response.data.pipe(fs.createWriteStream(`${__dirname}/tmp/structures/${ctx.update.message.from.id}.jpg`))
+                .on('finish', () => ctx.reply('файл успешно сохранен'))
+                .on('error', () => ctx.reply('произошла какая то ошибка'))
+            })
+          })
+        })
     })
 
+    // telegram admin buttons
     bot.command('messages', (ctx) => {
       ctx.reply('messages', {
         reply_markup: {
@@ -106,9 +142,9 @@ messages: \n`
                 })
               }
             })
-            contextFile.telegram.sendDocument('-358075072', { source: pathFile })
+            contextFile.telegram.sendDocument('-411803300', { source: pathFile })
           })
-          context.reply(outputChatFormat, {
+          context.reply('скачать ?', {
             reply_markup: {
               inline_keyboard: [
                 [
@@ -151,24 +187,21 @@ messages: \n`
       console.log(err)
     })
 
-    // event on connection
-    wss.on('connection', async (ws, data) => {
-      const newConnection = {
-        uid: uid(4),
-        connection: ws,
-        phoneNumber: data.url.substring(1)
-      }
-      clients.add(newConnection)
-      console.log(`connected: ${newConnection.uid}`)
-      bot.on('message', (ctx) => {
-        console.log(ctx.message)
+    // send message from admin to user
+    bot.on('message', async (ctx) => {
+      console.log(ctx.message)
 
-        if (ctx.message.reply_to_message) {
+      if (ctx.message.reply_to_message) {
+        if (
+          ctx.message.reply_to_message.from.is_bot === true &&
+          ctx.message.reply_to_message &&
+          ctx.message.reply_to_message.text.substring(0, 11) === '#newMessage'
+        ) {
           const replyMessage = ctx.message.reply_to_message.text
           const replyPhoneNumber = replyMessage.substring(replyMessage.indexOf('phone: ') + 7, replyMessage.indexOf('phone: ') + 7 + 12)
-          
+
           const MessageForSendAdminUser = {
-            action: 'saveFromAdminMessage',
+            action: 'messageFromAdmin',
             agent: 'telegram',
             data: {
               phoneNumber: '+7(705)-553-99-66',
@@ -178,40 +211,42 @@ messages: \n`
             }
           }
 
-          for (let clientForSendAdminUser of clients) {
-            if (clientForSendAdminUser.phoneNumber === replyPhoneNumber) {
-              clientForSendAdminUser.connection.send(JSON.stringify(MessageForSendAdminUser))
-            }
-          }
-        }
+          const updateMessageDataForSendAdminUser = await mongoMessages.updateOne(
+            { phoneNumber: replyPhoneNumber },
+            { $push: { messages: MessageForSendAdminUser } }
+          )
 
-        const telegramMessage = ctx.message.text.replace('/send', '')
-        const queryConnectionUID = telegramMessage.substr(telegramMessage.indexOf('uid: ') + 5, telegramMessage.indexOf(';') - 6)
-        clients.forEach(client => {
-          if (client.uid === queryConnectionUID) {
-            const newTelegramMessage = {
-              action: 'saveFromAdminMessage',
-              agent: 'telegram',
-              data: {
-                phoneNumber: '+7(705)-553-99-66',
-                userName: 'BSC STUDIO',
-                message: telegramMessage.substr(telegramMessage.indexOf(';') + 2),
-                timestamp: new Date()
+          const clientsHasArrayForSendAdminUser = new Array()
+          clients.forEach(value => {
+            clientsHasArrayForSendAdminUser.push(String(value.phoneNumber))
+          })
+
+          if (updateMessageDataForSendAdminUser.ok && !clientsHasArrayForSendAdminUser.includes(replyPhoneNumber)) {
+            ctx.reply('сообщение успешно отправлено, но пользователь сейчас не в сети')
+          }
+          else if (updateMessageDataForSendAdminUser.ok && clientsHasArrayForSendAdminUser.includes(replyPhoneNumber)) {
+            for (let clientForSendAdminUser of clients) {
+              if (clientForSendAdminUser.phoneNumber === replyPhoneNumber) {
+                clientForSendAdminUser.connection.send(JSON.stringify(MessageForSendAdminUser))
+                ctx.reply('сообщение успешно отправлено')
               }
             }
-            client.connection.send(JSON.stringify(newTelegramMessage))
-            ctx.reply('сообщение успешно отправлено')
-          } else {
-            const allClientsId = new Array()
-            clients.forEach(client => {
-              allClientsId.push(client.uid)
-            })
-            if (!allClientsId.includes(queryConnectionUID))
-              ctx.reply(`uid is wrong; ${client.uid} != ${queryConnectionUID}`)
           }
-        })
-      })
-      bot.launch()
+          else {
+            ctx.reply('Сообщение не отправлено, скорее всего такого пользователя не существует')
+          }
+        }
+      }
+    })
+
+    // event on connection
+    wss.on('connection', async (ws, data) => {
+      const newConnection = {
+        connection: ws,
+        phoneNumber: data.url.substring(1)
+      }
+      clients.add(newConnection)
+      console.log(`connected: ${newConnection.phoneNumber}`)
 
       ws.on('message', async msg => {
         msg = JSON.parse(msg)
@@ -234,7 +269,7 @@ messages: \n`
           ws.send(JSON.stringify(newMessage))
 
           bot.telegram.sendMessage('-411803300',
-            `new message sended from\nuid: ${newConnection.uid}\ndate: ${data.timestamp.toLocaleString("ru")}\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
+            `#newMessage\ndate: ${data.timestamp.toLocaleString("ru")}\nname: ${data.userName}\nphone: ${data.phoneNumber}\nmessage:\n  ${data.message}`
           )
         }
       })
@@ -242,7 +277,7 @@ messages: \n`
       // event on user disconnection
       ws.on('close', () => {
         clients.delete(newConnection)
-        console.log(`deleted: ${newConnection.uid}`)
+        console.log(`deleted: ${newConnection.phoneNumber}`)
       })
     })
     bot.launch()

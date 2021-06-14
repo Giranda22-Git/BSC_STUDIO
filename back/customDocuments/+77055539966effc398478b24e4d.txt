@@ -1,0 +1,444 @@
+
+userName: Dimash
+phoneNumber: +77055539966
+messages: 
+
+------------------------
+
+	date: 2021-2-2 21:37:49
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				Мы ответим вам в течении 10 минут
+
+
+------------------------
+
+	date: 2021-2-2 21:38:02
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-2-2 21:39:29
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-2-2 21:42:49
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-2-4 15:16:55
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				HI
+
+
+------------------------
+
+	date: 2021-2-4 15:18:08
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-4-20 3:22:54
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				Hi
+
+
+------------------------
+
+	date: 2021-4-20 3:23:16
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				dfdfdfdfdfdfdfdf
+
+
+------------------------
+
+	date: 2021-4-20 3:23:22
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				dfdfdfdfdfdfdfdf
+
+
+------------------------
+
+	date: 2021-4-20 3:23:22
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				dfdfdfdfdfdfdfdf
+
+
+------------------------
+
+	date: 2021-4-20 3:23:24
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				dfdfdfdfdfdfdfdf§
+
+
+------------------------
+
+	date: 2021-4-20 3:23:25
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				dfdfdfdfdfdfdfdf§
+
+
+------------------------
+
+	date: 2021-4-20 3:23:25
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				dfdfdfdfdfdfdfdf§
+
+
+------------------------
+
+	date: 2021-4-20 3:23:26
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				dfdfdfdfdfdfdfdf§
+
+
+------------------------
+
+	date: 2021-4-20 3:23:27
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				dfdfdfdfdfdfdfdf§
+
+
+------------------------
+
+	date: 2021-4-20 3:23:56
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-5-3 5:24:05
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-5-3 5:24:31
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-5-3 5:24:32
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-5-3 5:24:33
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-5-3 5:25:00
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-5-30 7:05:04
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				sdls,ldskdnskndsaksjdjsnsj
+
+
+------------------------
+
+	date: 2021-5-30 7:15:24
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus nemo ea facere nesciunt nisi delectus beatae, minus repellat culpa ipsam praesentium incidunt porro rerum qui optio, corrupti reiciendis cupiditate quae.
+
+
+------------------------
+
+	date: 2021-5-30 7:15:28
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus nemo ea facere nesciunt nisi delectus beatae, minus repellat culpa ipsam praesentium incidunt porro rerum qui optio, corrupti reiciendis cupiditate quae.
+
+
+------------------------
+
+	date: 2021-5-30 7:18:26
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				
+
+
+------------------------
+
+	date: 2021-5-30 7:20:57
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				jdndjkfdj
+
+
+------------------------
+
+	date: 2021-5-30 7:21:00
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				hello
+
+
+------------------------
+
+	date: 2021-5-30 7:21:08
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				my name is dimash
+
+
+------------------------
+
+	date: 2021-5-30 7:21:41
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				create me site please
+
+
+------------------------
+
+	date: 2021-5-31 20:49:42
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-5-31 20:50:40
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-5-31 21:43:45
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-5-31 21:44:28
+	userName: Димаш
+	phoneNumber: +77055539966
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-5-31 21:45:08
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				Здравствуйте
+
+
+------------------------
+
+	date: 2021-6-11 14:49:52
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				a
+
+
+------------------------
+
+	date: 2021-6-11 14:50:57
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				f
+
+
+------------------------
+
+	date: 2021-6-11 14:51:17
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				s
+
+
+------------------------
+
+	date: 2021-6-11 14:54:00
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				d
+
+
+------------------------
+
+	date: 2021-6-11 14:54:15
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				hello
+
+
+------------------------
+
+	date: 2021-6-11 15:03:43
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				ывыв
+
+
+------------------------
+
+	date: 2021-6-11 15:04:21
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-6-11 15:04:56
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				sdsd
+
+
+------------------------
+
+	date: 2021-6-13 6:01:44
+	userName: Dimash
+	phoneNumber: +77055539966
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-6-13 6:02:05
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				привет
+

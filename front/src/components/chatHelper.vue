@@ -55,7 +55,7 @@
 
 <script>
 import axios from 'axios'
-const connection = new WebSocket('ws://localhost:1000/')
+let connection = null
 //  { "result": true, "phoneNumber": "+7(705)-553-99-66", "userName": "Administrator", "message": "hello" }
 //  { "action": "sendMessage", "agent": "telegram", "data": { "result": true, "phoneNumber": "+7(705)-553-99-66", "userName": "Administrator", "message": "hello" } }
 export default {
@@ -76,34 +76,6 @@ export default {
     opened: false,
     openedAnimation: false
   }),
-  mounted () {
-    connection.onmessage = async (msg) => {
-      const data = JSON.parse(msg.data)
-      console.log(data)
-      data.data.timestamp = new Date(data.data.timestamp)
-      if (data.action === 'saveFromAdminMessage') {
-        const params = {
-          data: data,
-          phoneNumber: this.phone
-        }
-        await axios.post('http://localhost:3000/messages/messageFromAdmin', params)
-          .then(response => {
-            if (response.status === 200) {
-              console.log(response.data)
-              this.data = response.data
-            }
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
-      this.trustedMessage = data
-      this.user.messages.push(data)
-    }
-    connection.onerror = (err) => {
-      console.log(err)
-    }
-  },
   methods: {
     openAnimation () {
       this.$refs.wrapper.style.width = '30%'
@@ -123,11 +95,33 @@ export default {
       this.$refs.wrapper.style.cursor = 'pointer'
       this.opened = false
     },
+    async connect () {
+      connection = new WebSocket('ws://localhost:1000/' + this.phone)
+
+      connection.onmessage = async (msg) => {
+        const data = JSON.parse(msg.data)
+        console.log(data)
+        data.data.timestamp = new Date(data.data.timestamp)
+        this.trustedMessage = data
+        this.user.messages.push(data)
+      }
+
+      connection.onclose = async e => {
+        setTimeout(() => this.connect(), 1)
+      }
+
+      connection.onerror = (err) => {
+        console.log(err)
+      }
+    },
     async reg () {
       const params = {
         userName: this.userName,
         phoneNumber: this.phone
       }
+
+      this.connect()
+
       await axios.post('http://localhost:3000/messages', params)
         .then(response => {
           if (response.status === 200) {

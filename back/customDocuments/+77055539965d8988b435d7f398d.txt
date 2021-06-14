@@ -1,0 +1,234 @@
+
+userName: Igor
+phoneNumber: +77055539965
+messages: 
+
+------------------------
+
+	date: 2021-6-11 15:04:43
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				Мы ответим вам в течении 10 минут
+
+
+------------------------
+
+	date: 2021-6-11 15:05:03
+	userName: Igor
+	phoneNumber: +77055539965
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-6-11 15:05:09
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-6-11 15:26:20
+	userName: igor
+	phoneNumber: +77055539965
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 15:38:02
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 15:38:53
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				how do you do ?
+
+
+------------------------
+
+	date: 2021-6-11 15:57:59
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 15:59:37
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				gi
+
+
+------------------------
+
+	date: 2021-6-11 16:05:08
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 16:05:47
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				what ?
+
+
+------------------------
+
+	date: 2021-6-11 16:08:03
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 16:08:34
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 16:09:26
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 16:10:12
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				trrue
+
+
+------------------------
+
+	date: 2021-6-11 16:10:32
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 16:11:05
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 16:14:17
+	userName: Igor
+	phoneNumber: +77055539965
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 16:17:25
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 16:24:00
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-11 16:26:02
+	userName: Igor
+	phoneNumber: +77055539965
+	message: 
+
+				Hello
+
+
+------------------------
+
+	date: 2021-6-11 16:31:15
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				привет
+
+
+------------------------
+
+	date: 2021-6-11 16:32:00
+	userName: Igor
+	phoneNumber: +77055539965
+	message: 
+
+				hi
+
+
+------------------------
+
+	date: 2021-6-12 5:24:37
+	userName: BSC STUDIO
+	phoneNumber: +7(705)-553-99-66
+	message: 
+
+				привет
+
