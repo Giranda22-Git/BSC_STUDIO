@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view @switchMenuBlock='switchMenuBlock' />
     <chatHelper />
   </div>
 </template>
@@ -11,6 +11,15 @@ export default {
   name: 'App',
   components: {
     chatHelper
+  },
+  methods: {
+    switchMenuBlock (arg) {
+      if (arg) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = 'auto'
+      }
+    }
   }
 }
 </script>

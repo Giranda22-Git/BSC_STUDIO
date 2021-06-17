@@ -3,7 +3,7 @@
     <transition name="fade">
       <menuBlock style="transition: 1s" v-if="opened" />
     </transition>
-    <theHeader @switchMenuBlock='switchMenuBlock' />
+    <theHeader @switchMenuBlock='switchMenuBlock' :menuBlockOpened="opened" />
     <About />
     <About2 />
   </div>
@@ -28,6 +28,7 @@ export default {
   methods: {
     switchMenuBlock (arg) {
       this.opened = arg
+      this.$emit('switchMenuBlock', arg)
     }
   }
 }

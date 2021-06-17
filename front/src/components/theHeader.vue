@@ -7,13 +7,13 @@
         </div>
         <div class="rightContentWrapper">
           <ul>
-            <li>
+            <li v-if="!menuBlockOpened">
               Работы
             </li>
-            <li>
+            <li v-if="!menuBlockOpened">
               Услуги
             </li>
-            <li>
+            <li v-if="!menuBlockOpened">
               О Нас
             </li>
             <li class="burgerBTN" ref="burgerBTN" @click="burgerAnim">
@@ -23,8 +23,8 @@
           </ul>
         </div>
       </div>
-      <div class="middleContentWrapper">
-        ВНЕ ВОСПРИЯТИЕ
+      <div class="middleContentWrapper" v-if="!menuBlockOpened">
+        ВНЕ ВОСПРИЯТИЯ
       </div>
     </div>
   </div>
@@ -36,6 +36,12 @@ export default {
   data: () => ({
     burgerMenuStatus: false
   }),
+  props: {
+    menuBlockOpened: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
     burgerAnim () {
       if (this.burgerMenuStatus) {
