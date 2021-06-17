@@ -3,7 +3,7 @@
     <div class="front">
       <div class="topContentWrapper">
         <div class="leftContentWrapper">
-          BSC STUDIO
+          <router-link to="/">BSC STUDIO</router-link>
         </div>
         <div class="rightContentWrapper">
           <ul>
@@ -41,10 +41,12 @@ export default {
       if (this.burgerMenuStatus) {
         this.$refs.firstLine.style.transform = 'rotate(0deg) translate(0,4px)'
         this.$refs.secondLine.style.transform = 'rotate(0deg) translate(0,-4px)'
+        this.$emit('switchMenuBlock', false)
         this.burgerMenuStatus = false
       } else {
         this.$refs.firstLine.style.transform = 'rotate(45deg) translate(0px, 0px)'
         this.$refs.secondLine.style.transform = 'rotate(-45deg) translate(0px, -0px)'
+        this.$emit('switchMenuBlock', true)
         this.burgerMenuStatus = true
       }
     }
@@ -81,14 +83,17 @@ export default {
         justify-content: space-between
         align-items: center
         .leftContentWrapper
-          text-align: left
           display: flex
           align-items: center
-          color: white
-          font-family: 'Abel', sans-serif
-          font-weight: 10
-          font-size: 24px
-          cursor: pointer
+          position: relative
+          a
+            text-align: left
+            color: white
+            font-family: 'Abel', sans-serif
+            font-weight: 10
+            font-size: 24px
+            cursor: pointer
+            text-decoration: none
         .rightContentWrapper
           width: 50%
           color: white
