@@ -2,16 +2,9 @@
   <div class="wrapper">
     <div class="image_wrap">
       <div class="left">
-      <img src="@/assets/mainPage/About.png" class="image_bsc">
-     </div>
-     <div class="right"></div>
-    </div>
-    <div class="bot_block">
-      <div class="line"></div>
-      <div class="text_wrap">
-        <div class="left_text">ABOUT US</div>
-        <div class="right_text">We place great importance on the essential technology that influences human emotions and actions. Through extensive research and prototyping, we combine various technologies to create one single experience. Each day we work to maximize the value of experience by visualizing concepts and stories through technology and design. Where, with whom, and what will you experience, now that the line between reality and the virtual has been removed? We use creative power to present the answers and design the future of experience.</div>
+        <img src="@/assets/mainPage/About.png" class="image_bsc">
       </div>
+     <div class="right"></div>
     </div>
   </div>
 </template>
@@ -23,10 +16,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap')
   .wrapper
     width: 100vw
-    height: 104vh
     background-color: black
     display: flex
     flex-direction: column
@@ -53,13 +44,11 @@ export default {
         flex-direction: row
         align-items: center
         .left_text
-          font-family: 'Abel', sans-serif
           font-size: 1.9vh
           color: white
           width: 35%
         .right_text
           width: 65%
-          font-family: 'Abel', sans-serif
           font-size: 1.5vh
           color: white
   @media screen and ( max-width: 1024px )

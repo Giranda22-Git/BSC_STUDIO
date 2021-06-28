@@ -23,16 +23,13 @@
           </ul>
         </div>
       </div>
-      <div class="middleContentWrapper">
-        ВНЕ ВОСПРИЯТИЯ
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'theHeader',
+  name: 'HeaderForOtherPages',
   data: () => ({
     burgerMenuStatus: false
   }),
@@ -58,9 +55,7 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap')
   .wrapper
     width: 100%
-    height: 100vh
-    background: url(../assets/mainPage/headerBackground.svg) center no-repeat
-    background-size: cover
+    background-color: black
     display: flex
     flex-direction: column
     justify-content: flex-start

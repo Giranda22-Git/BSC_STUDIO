@@ -3,6 +3,13 @@
     <div class="company_wrap">
       <div class="line"></div>
       <div class="company_text_block">
+        <div class="left">ABOUT US</div>
+        <div class="right">We place great importance on the essential technology that influences human emotions and actions. Through extensive research and prototyping, we combine various technologies to create one single experience. Each day we work to maximize the value of experience by visualizing concepts and stories through technology and design. Where, with whom, and what will you experience, now that the line between reality and the virtual has been removed? We use creative power to present the answers and design the future of experience.</div>
+      </div>
+    </div>
+    <div class="company_wrap">
+      <div class="line"></div>
+      <div class="company_text_block">
         <div class="left">КОМПАНИЯ</div>
         <div class="right">Наша компания занимается разработкой веб-страниц, мобильных приложений и telegram ботов. Обращайтесь к нам, мы воплотим все ваши пожелания в реальность!</div>
       </div>
@@ -17,8 +24,8 @@
     <div class="company_wrap">
       <div class="line"></div>
       <div class="company_text_block">
-        <div class="left">ЦЕННЫ</div>
-        <div class="right">У нас ценны начинаются от 40.000тг. <br>У нашей комании такие дешевые ценны, так как мы стараемся делать работу быстро, дешево и качественно.</div>
+        <div class="left">ЦЕНЫ</div>
+        <div class="right">Цены начинаются от 40.000тг. <br>У нашей комании такие дешевые ценны, так как мы стараемся делать работу быстро, дешево и качественно.</div>
       </div>
     </div>
   </div>
@@ -33,13 +40,13 @@ export default {
 <style lang="sass" scoped>
   @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap')
   .wrapper
-    height: 100vh
+    min-height: 100vh
     width: 100vw
     background-color: black
     display: flex
     align-items: center
     flex-direction: column
-    justify-content: center
+    justify-content: space-around
     .company_wrap
       width: 80%
       height: 28%

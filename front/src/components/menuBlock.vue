@@ -46,7 +46,7 @@ export default {
     position: absolute
     top: 0
     left: 0
-    background-color: rgba(0,0,0,.5)
+    background-color: rgba(0,0,0,0.8)
     display: flex
     justify-content: space-between
     align-items: center

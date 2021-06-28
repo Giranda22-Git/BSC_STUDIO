@@ -44,9 +44,9 @@
         <hr>
         <div class="form">
           <input v-model="inputMessage" type="text" name="message" id="message" @keypress.enter="send" placeholder="Сообщение...">
-<svg @click="send" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-</svg>
+          <svg @click="send" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
         </div>
       </div>
     </div>
@@ -163,7 +163,7 @@ export default {
     height: 80px
     background: linear-gradient(88.33deg, rgba(155, 155, 155, 0.4) -41.77%, rgba(196, 196, 196, 0) 188.54%)
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-    backdrop-filter: blur(6px)
+    backdrop-filter: blur(5px)
     position: fixed
     right: 2%
     bottom: 2%
@@ -176,6 +176,7 @@ export default {
     align-items: center
     cursor: pointer
     transition: 1s
+    z-index: 100
     .openAnimation
       width: 100%
       height: 100%
@@ -339,7 +340,7 @@ export default {
           color: white
   @keyframes pulse
     0%
-      box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.5)
+      box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.5)
     100%
-      box-shadow: 0 0 0 40px rgba(0, 0, 0, 0)
+      box-shadow: 0 0 0 30px rgba(255, 255, 255, 0)
 </style>

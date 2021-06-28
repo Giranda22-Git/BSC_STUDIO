@@ -3,7 +3,7 @@
     <transition name="fade">
       <menuBlock style="transition: 1s" v-if="opened" />
     </transition>
-    <theHeader @switchMenuBlock='switchMenuBlock' :menuBlockOpened="opened" />
+    <theHeader @switchMenuBlock='switchMenuBlock' />
     <About />
     <About2 />
   </div>
